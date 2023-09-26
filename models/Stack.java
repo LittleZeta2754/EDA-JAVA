@@ -4,17 +4,22 @@ interface StackInterface {
     // Inserta una canción en el top de la pila
     public void push(Song song);
 
+    
     // Saca una canción del top de la pila
     public Song pop();
 
+
     // "Mira" la canción del top de la pila
     public Song peek();
+  
 
     // Verifica si la pila está vacía
     public boolean isEmpty();
+   
 
     // Imprime la pila
     public void print();
+    
 }
 
 public class Stack implements StackInterface {
@@ -26,24 +31,48 @@ public class Stack implements StackInterface {
 
     // Inserta una canción en el top de la pila
     public void push(Song song) {
+        Node newNode = new Node(song);
+        if (isEmpty()){
+            top = newNode;
+        } else {
+            newNode.next = top;
+            top = newNode;
+        }        
     }
 
     // Saca una canción del top de la pila
     public Song pop() {
+     if(!isEmpty()){
+        Song sacarSong = top.data;
+        top = top.next;
+        return sacarSong;
+     }else {
         return null;
+        }
     }
 
     // "Mira" la canción del top de la pila
     public Song peek() {
-        return null;
+        if(!isEmpty()){
+            return top.data;
+        } else {
+            return null;
+        }        
+        
     }
 
     // Verifica si la pila está vacía
     public boolean isEmpty() {
-        return true;
+        return top == null;
+        
     }
 
     // Imprime la pila
     public void print() {
+        Node inicio = top;
+        while(inicio !=null){
+            System.out.println(inicio.data);
+            inicio = inicio.next;
+        }
     }
 }
