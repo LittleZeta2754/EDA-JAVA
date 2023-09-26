@@ -12,4 +12,3 @@ public class HistoryController {
     /* Complementar con funciones faltantes! */
 
 }
-elpepe
