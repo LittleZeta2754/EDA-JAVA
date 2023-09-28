@@ -15,4 +15,10 @@ public class SongController {
 
     /* Complementar con funciones faltantes! */
 
+   public Song searchSong(String title){
+        return this.songList.search(title);
+        
+   } 
+
+   
 }

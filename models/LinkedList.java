@@ -1,5 +1,7 @@
 package models;
 
+import javax.swing.text.StyledEditorKit;
+
 interface LinkedListInterface {
     // Agrega una canción al final de la lista
     public void add(Song song);
@@ -31,35 +33,40 @@ public class LinkedList implements LinkedListInterface {
             head = newNode;
         } else {
             Node inicio = head;
-            while (inicio.next != null){
-                inicio = inicio.next;
+            while (inicio.getNext() != null){
+                inicio = inicio.getNext();
             }
-            inicio.next = newNode;
+            inicio= newNode;
         }
     }
 
     // Elimina una canción específica de la lista
     public void delete(Song song) {
-        if (head == null){
-            return
+        if (this.head == null){
+            return;
         }
-        Node inicio = head;
-        while (inicio.next != null){
-            if (inicio.next.data.equals(song)){
-                inicio.next = inicio.next.next;
+        Node inicio = this.head;
+        while (inicio.getNext() != null){
+            if (inicio.getNext().equals(song)){
+                inicio = inicio.getNext().getNext();
                 return;
             }
-            inicio = inicio.next;
+            inicio = inicio.getNext();
         }
     }
 
     // Buscar una canción por título
     public Song search(String title) {
-        Node inicio = head;
+        Node inicio = this.head;
         while (inicio != null){
-            if (inicio.data.getTitle().equals(title)){
-                return inicio.data;
+            if (inicio.getSong().getTitle().equals(title)){
+                return inicio.getSong();
+            }else{
+                System.out.println("No esta papu esa cancion");
+                break;
+
             }
+             
         }
         return null;
     }
@@ -73,7 +80,8 @@ public class LinkedList implements LinkedListInterface {
     public void print() {
         Node inicio = head;
         while (inicio != null) {
-            System.out.println(inicio.data.toString());
-            inicio = inicio.next;
+            System.out.println(inicio.toString());
+            inicio = inicio.getNext();
     }
+}
 }

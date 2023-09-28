@@ -31,19 +31,19 @@ public class Song implements SongInterface{
     
     // Getters
     public String getTitle() {
-        return null;
+        return this.title;
     };
     public String getArtist() {
-        return null;
+        return this.artist;
     };
     public String getYear() {
-        return null;
+        return this.year;
     };
     public String getId() {
-        return null;
+        return this.id;
     };
     public String toString() {
-        return null;
+        return this.title+" de " + this.artist;
     };
 
     // Setters

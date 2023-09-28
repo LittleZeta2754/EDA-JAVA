@@ -72,7 +72,11 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    songController.printAllSongs();
+                    System.out.println("Buscar cancion");
+                    Scanner a = new Scanner(System.in);
+                    String b = a.nextLine();
+                    songController.searchSong(b);
+
                     break;
                 case 2:
                     System.out.print("Introduce el id de la canción para añadir a la lista de reproducción: ");
