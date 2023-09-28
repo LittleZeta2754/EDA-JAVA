@@ -1,6 +1,7 @@
 package controllers;
 
-import models.*;
+import models.LinkedList;
+import models.Song;
 
 public class SongController {
     private LinkedList songList;

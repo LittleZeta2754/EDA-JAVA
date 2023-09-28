@@ -89,6 +89,7 @@ public class Main {
                     break;
                 case 5:
                     System.out.print("Últimas 5 canciones reproducidas: ");
+                    
                     break;
                 case 6:
                     System.out.println("¡Hasta luego!");

@@ -35,7 +35,7 @@ public class Stack implements StackInterface {
         if (isEmpty()){
             top = newNode;
         } else {
-            newNode.next = top;
+            newNode.setNext(top);
             top = newNode;
         }        
     }
@@ -43,8 +43,8 @@ public class Stack implements StackInterface {
     // Saca una canción del top de la pila
     public Song pop() {
      if(!isEmpty()){
-        Song sacarSong = top.data;
-        top = top.next;
+        Song sacarSong = top.getSong();
+        top = top.getNext();
         return sacarSong;
      }else {
         return null;
@@ -54,7 +54,7 @@ public class Stack implements StackInterface {
     // "Mira" la canción del top de la pila
     public Song peek() {
         if(!isEmpty()){
-            return top.data;
+            return top.getSong();
         } else {
             return null;
         }        
@@ -71,8 +71,8 @@ public class Stack implements StackInterface {
     public void print() {
         Node inicio = top;
         while(inicio !=null){
-            System.out.println(inicio.data);
-            inicio = inicio.next;
-        }
+            System.out.println(inicio.getSong().toString());
+            inicio = inicio.getNext();
     }
+}
 }
