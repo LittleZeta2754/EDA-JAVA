@@ -1,7 +1,6 @@
 package controllers;
 
-import models.LinkedList;
-import models.Song;
+import models.*;
 
 public class SongController {
     private LinkedList songList;
@@ -11,15 +10,18 @@ public class SongController {
     }
 
     public void addSong(Song song) {
-        this.songList.add(song);
+        this.songList.add(song); 
     }
 
-    /* Complementar con funciones faltantes! */
+    public void borrarSong(Song song) {
+        this.songList.delete(song);
+    } 
 
-   public Song searchSong(String title){
+    public Song buscarSong(String title) {
+        long start = System.nanoTime();
         return this.songList.search(title);
-        
-   } 
+        long duration = (System.nanoTime() - start)/1000000;
+        System.out.println("Buscada titulo demoró: " + duration + "ms");
+    }
 
-   
 }

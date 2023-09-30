@@ -4,22 +4,17 @@ interface StackInterface {
     // Inserta una canción en el top de la pila
     public void push(Song song);
 
-    
     // Saca una canción del top de la pila
     public Song pop();
 
-
     // "Mira" la canción del top de la pila
     public Song peek();
-  
 
     // Verifica si la pila está vacía
     public boolean isEmpty();
-   
 
     // Imprime la pila
     public void print();
-    
 }
 
 public class Stack implements StackInterface {
@@ -29,50 +24,43 @@ public class Stack implements StackInterface {
         this.top = null;
     }
 
-    // Inserta una canción en el top de la pila
-    public void push(Song song) {
-        Node newNode = new Node(song);
-        if (isEmpty()){
-            top = newNode;
-        } else {
-            newNode.setNext(top);
-            top = newNode;
-        }        
-    }
 
-    // Saca una canción del top de la pila
-    public Song pop() {
-     if(!isEmpty()){
-        Song sacarSong = top.getSong();
-        top = top.getNext();
-        return sacarSong;
-     }else {
-        return null;
+    public void push(Song song) {
+        Node n_Node = new Node(song);
+        if(this.top == null){
+            this.top = n_Node;
+        }else{
+            this.top.setNext(n_Node);
+            this.top = n_Node;
         }
     }
 
-    // "Mira" la canción del top de la pila
+    public Song pop() {
+        if(this.top != null){
+            this.top = this.top.getNext();
+        }
+        return null;
+    }
+
+
     public Song peek() {
-        if(!isEmpty()){
-            return top.getSong();
-        } else {
-            return null;
-        }        
-        
+        Song topSong = this.top.getSong();
+        return topSong;
     }
 
-    // Verifica si la pila está vacía
     public boolean isEmpty() {
-        return top == null;
-        
+        if(this.top == null){
+            return true;
+        }else{
+            return false;
+        }
     }
 
-    // Imprime la pila
     public void print() {
-        Node inicio = top;
-        while(inicio !=null){
-            System.out.println(inicio.getSong().toString());
-            inicio = inicio.getNext();
+        Node aux = this.top;
+        while(aux!= null){
+            System.out.println(aux.getSong());
+            aux = aux.getNext();
+        } 
     }
-}
 }

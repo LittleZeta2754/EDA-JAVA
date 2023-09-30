@@ -1,6 +1,5 @@
 package models;
 
-import javax.swing.text.StyledEditorKit;
 
 interface LinkedListInterface {
     // Agrega una canción al final de la lista
@@ -26,62 +25,76 @@ public class LinkedList implements LinkedListInterface {
         this.head = null;
     }
 
-    // Agrega una canción al final de la lista
+
     public void add(Song song) {
-        Node newNode = new Node(song);
-        if (head == null){
-            head = newNode;
-        } else {
-            Node inicio = head;
-            while (inicio.getNext() != null){
-                inicio = inicio.getNext();
+
+        Node n_node = new Node(song);
+        Node tmp = this.head;
+        //o(1)
+        if (this.head == null) {
+            this.head = n_node;
+            return;
+        }//O(N)
+        else{
+            while (tmp.getNext() != null) {
+                tmp = tmp.getNext();
             }
-            inicio= newNode;
+            tmp.setNext(n_node);
         }
     }
 
-    // Elimina una canción específica de la lista
     public void delete(Song song) {
-        if (this.head == null){
+
+        Node ret = null;
+        Node tmp;
+        if (this.head == null) {
             return;
         }
-        Node inicio = this.head;
-        while (inicio.getNext() != null){
-            if (inicio.getNext().equals(song)){
-                inicio = inicio.getNext().getNext();
+        if (this.head.getSong().compareTo(song) == 0) {
+            ret = this.head;
+            this.head = this.head.getNext();
+            return;
+        }
+        for (tmp = this.head; tmp.getNext()!= null; tmp = tmp.getNext()) {
+            if (tmp.getNext().getSong().(song) != 0) {
+                ret = tmp.getNext();
+                tmp.setNext(tmp.getNext().getNext());
                 return;
             }
-            inicio = inicio.getNext();
         }
-    }
+        return;
+    };
 
-    // Buscar una canción por título
     public Song search(String title) {
-        Node inicio = this.head;
-        while (inicio != null){
-            if (inicio.getSong().getTitle().equals(title)){
-                return inicio.getSong();
-            }else{
-                System.out.println("No esta papu esa cancion");
-                break;
 
+        if (this.head == null) {
+            return null;
+        }else{
+
+            Node tmp;
+            for (tmp = this.head; tmp != null; tmp = tmp.getNext()) {
+                if (tmp.getSong().getTitle().compareTo(title) == 0) {
+                    return tmp.getSong();
+                }
             }
-             
+            return null;
         }
-        return null;
     }
 
-    // Revisa si la lista está vacía
+
     public boolean isEmpty() {
-       return head == null;
-    }
+        if (this.head == null){
+            return true;
+        }else {
+            return false;
+        }
+    };
 
-    // Imprimir todas las canciones
     public void print() {
-        Node inicio = head;
-        while (inicio != null) {
-            System.out.println(inicio.toString());
-            inicio = inicio.getNext();
-    }
-}
-}
+        Node tmp;
+        for (tmp = this.head; tmp != null; tmp = tmp.getNext()) {
+            System.out.println(tmp.getSong() + "-");
+        }
+    };
+
+};

@@ -29,58 +29,85 @@ public class Queue implements QueueInterface {
         this.tail = null;
     }
 
-    // Añadir una canción al final de la cola (rear)
+
     public void enqueue(Song song) {
-        Node<T> newNode = new Node<>(item);
-        if (isEmpty()) {
-            head = newNode;
-            tail = newNode;
-        } else {
-            tail.next = newNode;
-            tail = newNode;
+        Node n_Node = new Node(song);
+        if(this.head == null && this.tail == null){
+            this.head = this.tail = n_Node;
+        } else{ 
+            this.tail.setNext(n_Node);
+            this.tail = n_Node;
         }
     }
 
-    // Sacar una canción del frente de la cola. retorna la canción y la elimina el nodo.
+    public void enqueuePrimer(Song song) {
+        Node n_Node = new Node(song);
+        if(this.head == null){
+            this.tail = n_Node;
+            this.head = n_Node;
+        } else{ 
+            n_Node.setNext(this.head);
+            this.head = n_Node;
+        }
+    }
+
+
     public Song dequeue() {
-        if (isEmpty()) {
-            throw new IllegalStateException("La cola está vacía");
+        if(!this.isEmpty()){
+            Song tmp = this.head.getSong();
+            this.head = this.head.getNext();
+            return tmp;
+        }else{
+            return null;
         }
-        T item = head.data;
-        head = head.next;
-        if (head == null) {
-            tail = null;
-        }
-        return item;
     }
 
-    // "Mirar" la canción del frente de la cola
+    public Song dequeueUltima() {
+ 
+        if (this.isEmpty()) {
+            return null;
+        }
+        else{
+            Node prevNodo = this.head;
+
+            while (prevNodo.getNext() != this.tail) {
+                prevNodo = prevNodo.getNext();
+            }
+
+            Song tmp = this.tail.getSong();
+
+            this.tail = prevNodo;
+            prevNodo.setNext(null);
+
+            return tmp;
+        }
+    }
+
+
     public Song peek() {
-        if (isEmpty()) {
-            throw new IllegalStateException("La cola está vacía");
-        }
-        return head.data;
+        Song peekSong = this.head.getSong();
+        return peekSong;
     }
 
-    // "Mirar" la canción del final de la cola
+
     public Song peekTail() {
-        if (isEmpty()) {
-            throw new IllegalStateException("La cola está vacía");
-        }
-        return tail.data;
+        Song tailSong = this.tail.getSong();
+        return tailSong;
     }
 
-    // Verificar si la cola está vacía
+
     public boolean isEmpty() {
-        return head == null;
+        if (this.head == null){
+            return true;
+        }else {
+            return false;
+        }
     }
 
-    // Imprimir la cola
-    public void print() {
-        Node<T> current = head;
-        while (current != null) {
-            System.out.println(current.data);
-            current = current.next;
+    public void print() { 
+        Node tmp;
+        for (tmp = this.head; tmp != null; tmp = tmp.getNext()) {
+            System.out.println(tmp.getSong() + "-");
         }
     }
 }
